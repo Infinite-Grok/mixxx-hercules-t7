@@ -115,7 +115,7 @@ function createEnv(opts = {}) {
   });
   const midi = {
     sendShortMsg(a, b, c) { out.push({msg: [a, b, c], motorCtx: inMotor > 0, t: now}); },
-    sendSysexMsg(data, len) { sysex.push({data: Array.from(data), len}); },
+    sendSysexMsg(data, len) { sysex.push({data: Array.from(data), len, after: out.length}); },
     makeInputHandler() { throw new Error('midi.makeInputHandler is not supported by this stub'); },
   };
   const FakeDate = class extends Date {

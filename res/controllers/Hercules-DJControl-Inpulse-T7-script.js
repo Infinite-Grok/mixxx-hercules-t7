@@ -1015,6 +1015,15 @@ DJCiT7.release = function() {
 };
 
 /**
+ * The setup message the T7 needs before it shows host lamps on the six FX buttons (notes 0x20-0x25). Without it the
+ * T7 ignores those lamp messages. Byte 11 is 1 to switch the mode on and 0 to switch it off. Measured on the wire
+ * from the T7's own host session (a hardware fact; no code copied).
+ * @type {number[]}
+ */
+DJCiT7.FX_LIGHTS_ON = [0xF0, 0x00, 0x01, 0x4E, 0x20, 0x02, 0x07, 0x7F, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0xF7];
+DJCiT7.FX_LIGHTS_OFF = [0xF0, 0x00, 0x01, 0x4E, 0x20, 0x02, 0x07, 0x7F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF7];
+
+/**
  * Mixxx calls this when the mapping is loaded. It can run again without a shutdown in between.
  */
 DJCiT7.init = function() {
@@ -1027,6 +1036,11 @@ DJCiT7.init = function() {
     DJCiT7.deck2.showPage(1);
     // Ask the T7 for the position of every knob, fader and switch.
     midi.sendShortMsg(0xB0, 0x7F, 0x7F);
+    // Switch on the FX button lamps, then show which effect slots are on now.
+    midi.sendSysexMsg(DJCiT7.FX_LIGHTS_ON, DJCiT7.FX_LIGHTS_ON.length);
+    for (let button = 1; button <= 6; button++) {
+        DJCiT7.fx[`slotButton${button}`].trigger();
+    }
 };
 
 /**
@@ -1042,4 +1056,5 @@ DJCiT7.shutdown = function() {
     for (let note = 0x20; note <= 0x25; note++) {
         midi.sendShortMsg(0x90, note, 0x00);
     }
+    midi.sendSysexMsg(DJCiT7.FX_LIGHTS_OFF, DJCiT7.FX_LIGHTS_OFF.length);
 };

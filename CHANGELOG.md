@@ -16,5 +16,6 @@ First public beta of the Hercules DJControl Inpulse T7 mapping for Mixxx 2.5.6 o
 - Clean start-up and shut-down: lamps are turned off and all timers and connections are removed on exit.
 - Fix: anything held (a roll, sampler or FX pad, or the FX lever) is released when the mapping is reloaded or Mixxx closes, so no roll, sample or effect is left running and the effect routing is put back.
 - Fix: the FX levers now work whichever FX button the T7 last lit (the lever sends a different note after power-on or each FX button; only two of the four were bound).
+- Fix: the FX buttons now light to show which effects are on in Mixxx.
 - Fix: letting go of PARAM after pressing SHIFT now ends the nudge (it used to keep speeding up or slowing down).
 - Offline test suite (Node 22): control-name audit against Mixxx 2.5.6, lifecycle, safety, pad colours, and a byte-identical check of the platter decoder.

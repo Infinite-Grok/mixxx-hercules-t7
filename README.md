@@ -104,7 +104,7 @@ Open an issue at https://github.com/Infinite-Grok/mixxx-hercules-t7/issues and t
 
 ## How this was made
 
-This mapping was written with AI assistance (Claude and Codex) under the author's direction, and it was tested on real T7 hardware by the author.
+This mapping was written with AI assistance (Claude and Codex) under the author's direction, and it was tested on real T7 hardware by the author. The setup message that makes the T7 show the FX button lights was measured on the USB wire from the T7's own host session.
 
 ## Credits
 
