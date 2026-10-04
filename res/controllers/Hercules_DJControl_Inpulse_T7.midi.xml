@@ -297,6 +297,26 @@
             </control>
             <control>
                 <group>[Channel1]</group>
+                <key>DJCiT7.deck1.paramUpButton.input</key>
+                <description>SHIFT + PARAM right, deck 1: ends the speed-up if SHIFT was pressed while held</description>
+                <status>0x94</status>
+                <midino>0x53</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCiT7.deck1.paramDownButton.input</key>
+                <description>SHIFT + PARAM left, deck 1: ends the slow-down if SHIFT was pressed while held</description>
+                <status>0x94</status>
+                <midino>0x54</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
                 <key>DJCiT7.deck1.effectLever.input</key>
                 <description>FX lever, deck 1: effect unit on while held</description>
                 <status>0x91</status>
@@ -2186,6 +2206,26 @@
                 <key>DJCiT7.deck2.paramDownButton.input</key>
                 <description>PARAM left, deck 2: slow down while held</description>
                 <status>0x92</status>
+                <midino>0x54</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>DJCiT7.deck2.paramUpButton.input</key>
+                <description>SHIFT + PARAM right, deck 2: ends the speed-up if SHIFT was pressed while held</description>
+                <status>0x95</status>
+                <midino>0x53</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>DJCiT7.deck2.paramDownButton.input</key>
+                <description>SHIFT + PARAM left, deck 2: ends the slow-down if SHIFT was pressed while held</description>
+                <status>0x95</status>
                 <midino>0x54</midino>
                 <options>
                     <script-binding/>

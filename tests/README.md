@@ -3,7 +3,7 @@
 Needs Node 22 or newer. No Mixxx and no device are needed. From the repo root:
 
     node tests/run.cjs res/controllers          # the suite (exit code 1 if any test fails)
-    node tests/selftest.cjs                     # negative controls: the suite must fail on 12 known breakages
+    node tests/selftest.cjs                     # negative controls: the suite must fail on 15 known breakages
 
 Options of `run.cjs`: `[candidateDir] [--json out.json] [--seen names.txt] [--only text] [--list]`.
 `candidateDir` holds one `.xml` and the script files its `<scriptfiles>` names. It defaults to `$T7_CANDIDATE`, else `res/controllers` of this repo.

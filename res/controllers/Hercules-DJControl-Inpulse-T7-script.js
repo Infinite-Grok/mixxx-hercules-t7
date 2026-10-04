@@ -266,6 +266,8 @@ DJCiT7.Deck = function(number) {
     this.effectHolders = {lever: false, pad: false};
     this.effectPreviousRouting = 0;
     this.heldPads = [null, null, null, null, null, null, null, null];
+    // The MIDI channel, note and status of each held pad's press, so a release can be sent later.
+    this.heldPadInputs = [null, null, null, null, null, null, null, null];
     // The pad note base (0x00, 0x10 ... 0x70) of the last unshifted pad press, or null.
     this.padBase = null;
 
@@ -356,9 +358,10 @@ DJCiT7.Deck = function(number) {
     // a short time.
     const nudgeButton = function(direction) {
         return button({
-            input: function(_channel, _control, value) {
+            input: function(_channel, _control, value, status) {
                 deck.stopNudge();
-                if (value === 0 || deck.shiftHeld) {
+                // A press on the SHIFT channel is ignored; a release on it still ends the nudge.
+                if (value === 0 || deck.shiftHeld || status === shifted) {
                     return;
                 }
                 const jog = direction * DJCiT7.NUDGE / DJCiT7.JOG_SENSITIVITY;
@@ -741,6 +744,7 @@ DJCiT7.Deck.prototype.pad = function(channel, control, value, status) {
     }
     pad.input(channel, control, value, status);
     this.heldPads[index] = pad;
+    this.heldPadInputs[index] = [channel, control, status];
 };
 
 /**
@@ -754,6 +758,7 @@ DJCiT7.Deck.prototype.releasePad = function(index, channel, control, status) {
     const pad = this.heldPads[index];
     if (pad) {
         this.heldPads[index] = null;
+        this.heldPadInputs[index] = null;
         pad.input(channel, control, 0, status);
     }
 };
@@ -798,9 +803,26 @@ DJCiT7.Deck.prototype.stopNudge = function() {
     }
 };
 
-/** Release every connection and timer this deck owns. */
+/**
+ * Let go of everything this deck holds, the way hardware releases would: every held pad, then
+ * the FX lever. The effect routing is put back before the state is discarded.
+ */
+DJCiT7.Deck.prototype.releaseHeld = function() {
+    for (let index = 0; index < this.heldPads.length; index++) {
+        const input = this.heldPadInputs[index];
+        if (this.heldPads[index] && input) {
+            this.releasePad(index, input[0], input[1], input[2]);
+        }
+    }
+    if (this.effectHolders.lever) {
+        this.holdEffect("lever", false);
+    }
+};
+
+/** Release every held action, then every connection and timer this deck owns. */
 DJCiT7.Deck.prototype.release = function() {
     this.stopNudge();
+    this.releaseHeld();
     this.ringConnections.forEach(function(connection) {
         connection.disconnect();
     });

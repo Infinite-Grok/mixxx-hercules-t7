@@ -30,6 +30,8 @@ const MUTATIONS = [
   {name: 'sampler pad loads the selected track like the stock SamplerButton', file: SCRIPT, edit: s => s.replace('        engine.setValue(this.group, "cue_gotoandplay", 1);', '        engine.setValue(this.group, "LoadSelectedTrack", 1);'), expect: ['sampler page 4:']},
   {name: 'sampler count raised at init instead of on demand', file: SCRIPT, edit: s => s.replace('DJCiT7.buildMixer();\n    DJCiT7.deck1.showPage(1);', 'DJCiT7.buildMixer();\n    engine.setValue("[App]", "num_samplers", 8);\n    DJCiT7.deck1.showPage(1);'), expect: ['sampler page 4:']},
   {name: 'sampler release does not stop (no hold-to-play)', file: SCRIPT, edit: s => s.replace('                engine.setValue(this.group, "cue_gotoandstop", 1);', '                engine.setValue(this.group, "play", 1);'), expect: ['sampler page 4:']},
+  {name: 'deck release skips the held-action release (roll, sampler, FX left active at shutdown)', file: SCRIPT, edit: s => s.replace('    this.releaseHeld();\n', ''), expect: ['held release (shutdown, deck 1)', 'held release (init again, deck 2)']},
+  {name: 'shifted PARAM bindings removed from the XML (nudge stranded by SHIFT)', file: XML, edit: s => s.replace(/ *<control>\n(?:(?!<\/control>)[^])*<\/control>\n/g, c => (/param(Up|Down)Button/.test(c) && /<status>0x9[45]<\/status>/.test(c) ? '' : c)), expect: ['PARAM + SHIFT (deck 1)', 'PARAM + SHIFT (deck 2)']},
   {name: 'padBase lamp removed', file: SCRIPT, edit: s => s.replace('midi.sendShortMsg(pads, deck.padBase + i, value);', ''), expect: ['pad lamp is also driven']},
 ];
 
