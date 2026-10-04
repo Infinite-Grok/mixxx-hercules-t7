@@ -24,7 +24,7 @@ Copy all three into the **user controllers folder** of Mixxx, then restart Mixxx
 
 If the `controllers` folder does not exist yet, create it. On macOS the `Library` folder is hidden: in Finder use Go > Go to Folder and paste the path. (On macOS, a Mixxx that was installed in the past and never ran in the sandbox may keep its settings in `~/Library/Application Support/Mixxx` instead; Mixxx moves them to the path above when it starts.)
 
-**How these paths were checked.** Against the Mixxx 2.5 source (tag 2.5.6): the settings folder is `QStandardPaths::AppLocalDataLocation` on Windows and macOS and `$HOME/.mixxx` on Linux (`src/util/cmdlineargs.cpp`, `CMakeLists.txt`: `MIXXX_SETTINGS_PATH ".mixxx/"`), the macOS sandbox path is in `src/util/sandbox.cpp`, and the user mappings folder is the `controllers` folder inside the settings folder (`userMappingsPath()` in `src/controllers/controllermanager.cpp`). The paths come from the source only; they have not been tried on a real macOS or Linux install, and the Windows one is the standard Qt local-app-data location (`C:SERS<YOU>APPDATAocalmixxx`).
+These folders were taken from the Mixxx 2.5 source code; the Windows one is confirmed on a real install, macOS and Linux are not tried yet.
 
 ## Turn it on in Mixxx
 
@@ -77,7 +77,7 @@ The four buttons under the pads choose the page. SHIFT plus the same four button
 | 1 HOT CUE | Jump to hot cue 1-8, or set it | Delete the hot cue | The colour of the cue; dark if empty |
 | 2 LOOP | Loops of 1/4 to 32 beats, on or off | Loop roll of the same size | Blinks teal while that loop runs |
 | 3 (stems) | nothing | nothing | dark |
-| 4 SAMPLER | Play sampler 1-8 from the start | Stop and go back to the start | Pink if loaded (blinks while playing); dark if empty |
+| 4 SAMPLER | Hold to play sampler 1-8 from the start; let go and it stops | same | Pink if loaded (blinks while playing); dark if empty |
 | 5 BEAT JUMP | Jump back 1, 2, 4, 8 beats (pads 1-4) or forward (pads 5-8) | Four times as far | Dim green; light green while held |
 | 6 ROLL | Loop roll of 1/16 to 8 beats while held | same | Cyan while rolling |
 | 7 FX | Pads 1-3: arm effect slot 1-3. Pad 4: effect unit on while held | same | Dim red off, red on |

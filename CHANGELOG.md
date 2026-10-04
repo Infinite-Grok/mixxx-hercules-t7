@@ -7,6 +7,7 @@ First public beta of the Hercules DJControl Inpulse T7 mapping for Mixxx 2.5.6 o
 - Two decks: PLAY/PAUSE, CUE, SYNC, SHIFT layer, loop controls (IN, OUT, AUTOLOOP knob), tempo range and key lock, nudge with the PARAM buttons, channel fader, gain, EQ, filter and deck headphone button.
 - Motorized platters: scratching and nudging, and the platter follows the track's speed. The motor is always on, as in Serato and DJUCED.
 - Eight performance pad pages per deck (HOT CUE, LOOP, SAMPLER, BEAT JUMP, ROLL, FX, KEY), with pad colours. Page 3 (stems) is unused in Mixxx 2.5.
+- Sampler pads play like a held cue: press plays the sample from the start, let go and it stops and goes back to the start.
 - Sampler pads add samplers on demand when a pad above the current sampler count is pressed.
 - Browse knob and library buttons (load, enter, back, add to Auto DJ).
 - Mixer section: crossfader with the mix / scratch / disabled curve switch, cue/mix knob, master headphone split-cue button.

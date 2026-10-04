@@ -5,7 +5,6 @@
         <author>Infinite-Grok</author>
         <description>Mapping for the Hercules DJControl Inpulse T7: two decks with motorized platters, performance pads, effects and the mixer section.</description>
         <wiki>https://github.com/Infinite-Grok/mixxx-hercules-t7</wiki>
-        <manual>hercules_djcontrol_inpulse_t7</manual>
     </info>
     <controller id="DJControl Inpulse T7">
         <scriptfiles>

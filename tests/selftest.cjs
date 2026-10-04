@@ -27,8 +27,9 @@ const MUTATIONS = [
   {name: 'XML binding points at a missing function', file: XML, edit: s => s.replace('<key>DJCiT7.deck1.syncButton.input</key>', '<key>DJCiT7.deck1.syncButtonMissing.input</key>'), expect: ['every script-binding resolves']},
   {name: 'engine call that does not exist in 2.5 (engine.load)', file: SCRIPT, edit: s => s + wrapBefore('DJCiT7.Deck.prototype.pageButton', "engine.load('x.js');"), expect: ['every script binding runs']},
   {name: 'pad release ignores the pressed pad (stuck hot cue / roll)', file: SCRIPT, edit: s => s + '\nDJCiT7.Deck.prototype.releasePad = function() {};\n', expect: ['pads: release always matches']},
-  {name: 'sampler pad loads the selected track like the stock SamplerButton', file: SCRIPT, edit: s => s.replace('engine.setValue(this.group, this.shifted ? "cue_gotoandstop" : "cue_gotoandplay", 1);', 'engine.setValue(this.group, "LoadSelectedTrack", 1);'), expect: ['sampler page 4 keeps']},
-  {name: 'sampler count raised at init instead of on demand', file: SCRIPT, edit: s => s.replace('DJCiT7.buildMixer();\n    DJCiT7.deck1.showPage(1);', 'DJCiT7.buildMixer();\n    engine.setValue("[App]", "num_samplers", 8);\n    DJCiT7.deck1.showPage(1);'), expect: ['sampler page 4 keeps']},
+  {name: 'sampler pad loads the selected track like the stock SamplerButton', file: SCRIPT, edit: s => s.replace('        engine.setValue(this.group, "cue_gotoandplay", 1);', '        engine.setValue(this.group, "LoadSelectedTrack", 1);'), expect: ['sampler page 4:']},
+  {name: 'sampler count raised at init instead of on demand', file: SCRIPT, edit: s => s.replace('DJCiT7.buildMixer();\n    DJCiT7.deck1.showPage(1);', 'DJCiT7.buildMixer();\n    engine.setValue("[App]", "num_samplers", 8);\n    DJCiT7.deck1.showPage(1);'), expect: ['sampler page 4:']},
+  {name: 'sampler release does not stop (no hold-to-play)', file: SCRIPT, edit: s => s.replace('                engine.setValue(this.group, "cue_gotoandstop", 1);', '                engine.setValue(this.group, "play", 1);'), expect: ['sampler page 4:']},
   {name: 'padBase lamp removed', file: SCRIPT, edit: s => s.replace('midi.sendShortMsg(pads, deck.padBase + i, value);', ''), expect: ['pad lamp is also driven']},
 ];
 

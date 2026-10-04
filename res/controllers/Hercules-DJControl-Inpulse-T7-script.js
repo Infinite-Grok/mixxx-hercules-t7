@@ -39,8 +39,8 @@
 // Each deck has its own pad page. The four page buttons choose pages 1 to 4, and SHIFT with a
 // page button chooses pages 5 to 8:
 //   1 hot cues, 2 loops, 3 unused (dark), 4 samplers, 5 beat jump, 6 loop roll, 7 effects, 8 key.
-// The sampler pads play or stop the sampler (not the library's SamplerButton, which would load
-// and eject tracks). Pressing pad N raises the number of samplers in Mixxx to N if it is lower;
+// The sampler pads play like a held cue: a press plays the sampler from its cue point, a release
+// stops it there (not the library's SamplerButton, which would load and eject tracks). Pressing pad N raises the number of samplers in Mixxx to N if it is lower;
 // nothing is written to it when the mapping loads.
 
 var DJCiT7 = {}; // eslint-disable-line
@@ -177,9 +177,9 @@ DJCiT7.stopBlink = function(pad) {
 };
 
 /**
- * A sampler pad. A press plays sampler N from its cue point, SHIFT + press goes to the cue point
- * and stops, a release does nothing. The lamp shows whether the sampler has a track, and blinks
- * while it plays.
+ * A sampler pad, played like a held cue: a press plays sampler N from its cue point and a release
+ * stops it and returns it to the cue point (the same on the SHIFT layer). The lamp shows whether
+ * the sampler has a track, and blinks while it plays.
  * Mixxx starts with 4 samplers: a press on a pad above that count first raises
  * [App] num_samplers to the pad's number. The lamp follows [SamplerN] track_loaded and play, and
  * those connections are made only while the sampler exists: when the pad is shown, and again
@@ -202,12 +202,15 @@ DJCiT7.SamplerPad.prototype = new components.Button({
     },
     input: function(_channel, _control, value) {
         if (value === 0) {
+            if (engine.getValue("[App]", "num_samplers") >= this.number) {
+                engine.setValue(this.group, "cue_gotoandstop", 1);
+            }
             return;
         }
         if (engine.getValue("[App]", "num_samplers") < this.number) {
             engine.setValue("[App]", "num_samplers", this.number);
         }
-        engine.setValue(this.group, this.shifted ? "cue_gotoandstop" : "cue_gotoandplay", 1);
+        engine.setValue(this.group, "cue_gotoandplay", 1);
     },
     connect: function() {
         this.connections[0] = engine.makeConnection("[App]", "num_samplers", this.countChanged.bind(this));

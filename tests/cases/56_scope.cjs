@@ -38,7 +38,7 @@ exports.register = t => {
     M(0x90, 2, 127); M(0x90, 2, 0); h.eq(env.get('[Master]', 'headSplit'), 0, 'second press: split cue off');
   });
 
-  t.test('sampler page 4 keeps its on-demand behaviour: nothing at init, count raised on demand, play / go-to-and-stop', 'core', h => {
+  t.test('sampler page 4: nothing at init, count raised on demand, hold to play (press plays from cue, release stops at cue)', 'core', h => {
     const {env, M} = fresh(h);
     h.eq(env.writes.filter(w => w[0] === '[App]' && w[1] === 'num_samplers').length, 0, 'nothing written to num_samplers at init');
     M(0x91, 18, 127);                                          // page 4
@@ -48,13 +48,17 @@ exports.register = t => {
     h.eq(env.get('[Sampler7]', 'cue_gotoandplay'), 1, 'press writes cue_gotoandplay on [Sampler7]');
     const w1 = env.writes.length;
     M(0x96, 0x36, 0);
-    h.eq(env.writes.length, w1, 'release writes nothing');
+    h.eq(env.writes.slice(w1).filter(w => w[0] === '[Sampler7]' && w[1] === 'cue_gotoandstop' && w[2] === 1).length, 1, 'release writes cue_gotoandstop once (stops and returns to the cue)');
+    h.eq(env.writes.slice(w1).filter(w => w[1] === 'cue_gotoandplay').length, 0, 'release does not play');
     env.set('[Sampler7]', 'track_loaded', 1);
     h.eq(env.lastOut(0x96, 0x36), 0x63, 'pad lamp lit (0x63) by [Sampler7] track_loaded once the sampler exists');
     env.set('[Sampler7]', 'track_loaded', 0);
     h.eq(env.lastOut(0x96, 0x36), 0, 'pad lamp off again when unloaded');
-    M(0x96, 0x3E, 127); M(0x96, 0x3E, 0);                      // SHIFT layer of pad 7
-    h.eq(env.get('[Sampler7]', 'cue_gotoandstop'), 1, 'SHIFT + press writes cue_gotoandstop');
+    const w2 = env.writes.length;
+    M(0x96, 0x3E, 127);                                        // SHIFT layer of pad 7: same hold-to-play
+    h.eq(env.writes.slice(w2).filter(w => w[0] === '[Sampler7]' && w[1] === 'cue_gotoandplay').length, 1, 'SHIFT + press plays from the cue too');
+    M(0x96, 0x3E, 0);
+    h.eq(env.writes.slice(w2).filter(w => w[0] === '[Sampler7]' && w[1] === 'cue_gotoandstop').length, 1, 'SHIFT + release stops at the cue');
     h.eq(env.writes.filter(w => w[0].startsWith("[Sampler") && (w[1] === 'LoadSelectedTrack' || w[1] === 'eject')).length, 0, 'never LoadSelectedTrack or eject');
     // a press on a pad below the current count does not lower or touch num_samplers
     const n = env.writes.filter(w => w[1] === 'num_samplers').length;
