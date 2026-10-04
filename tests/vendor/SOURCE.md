@@ -10,5 +10,11 @@ Source: `res/controllers/` of the Mixxx repository, https://github.com/mixxxdj/m
 
 Mixxx always loads `common-controller-scripts.js` before a mapping's own `<scriptfiles>` (`REQUIRED_SCRIPT_FILE`,
 `src/controllers/legacycontrollermappingfilehandler.cpp:233`), so the harness does the same. `midi-components-0.0.js` and
-`lodash.mixxx.js` are loaded only if the candidate's XML lists them. They are GPL (Mixxx). These
-copies are test support only and keep their original licence (GPL-2.0-or-later, as Mixxx).
+`lodash.mixxx.js` are loaded only if the candidate's XML lists them. These copies are test support only and keep
+their original licences:
+
+- `midi-components-0.0.js`: GPL-2.0-or-later (Mixxx), as its file header says (copyright 2017 Be).
+- `common-controller-scripts.js`: GPL-2.0-or-later (Mixxx). The file has no licence header of its own; it is covered by the
+  Mixxx `LICENSE` (GPL version 2 or any later version), https://github.com/mixxxdj/mixxx/blob/2.5.6/LICENSE.
+- `lodash.mixxx.js`: MIT, copyright JS Foundation and other contributors (a custom Lodash 4.17.5 build, as its header
+  says). The licence text is in `LICENSE-lodash.txt`.
