@@ -77,7 +77,7 @@ The four buttons under the pads choose the page. SHIFT plus the same four button
 | 1 HOT CUE | Jump to hot cue 1-8, or set it | Delete the hot cue | The colour of the cue; dark if empty |
 | 2 LOOP | Loops of 1/4 to 32 beats, on or off | Loop roll of the same size | Blinks teal while that loop runs |
 | 3 (stems) | nothing | nothing | dark |
-| 4 SAMPLER | Hold to play sampler 1-8 from the start; let go and it stops | same | Pink if loaded (blinks while playing); dark if empty |
+| 4 SAMPLER | Hold to play sampler 1-8 from its cue point; let go and it stops and goes back to the cue point | same | Pink if loaded (blinks while playing); dark if empty |
 | 5 BEAT JUMP | Jump back 1, 2, 4, 8 beats (pads 1-4) or forward (pads 5-8) | Four times as far | Dim green; light green while held |
 | 6 ROLL | Loop roll of 1/16 to 8 beats while held | same | Cyan while rolling |
 | 7 FX | Pads 1-3: arm effect slot 1-3. Pad 4: effect unit on while held | same | Dim red off, red on |
@@ -100,7 +100,7 @@ Open an issue at https://github.com/Infinite-Grok/mixxx-hercules-t7/issues and t
 
 - your operating system and the Mixxx version (Help > About),
 - what you pressed and what you expected,
-- if possible, the Mixxx log (`mixxx.log` in the Mixxx settings folder; start Mixxx with `--controller-debug` for more detail).
+- if possible, the Mixxx log (`mixxx.log` in the Mixxx settings folder). The normal log is usually enough. Use `--controller-debug` only for a short diagnostic session, never while playing: in testing it caused PortMidi buffer overflows and irregular platter timing.
 
 ## How this was made
 
@@ -116,4 +116,4 @@ An offline test suite (no Mixxx and no T7 needed) is in `tests/`; see `tests/REA
 
 ## Licence
 
-GPL-2.0-or-later, the same as Mixxx. The licence text (GPL version 2) is in `LICENSE`. The files in `tests/vendor/` are unmodified copies from Mixxx and keep Mixxx's licence.
+GPL-2.0-or-later, the same as Mixxx. The licence text (GPL version 2) is in `LICENSE`. The files in `tests/vendor/` are unmodified copies from Mixxx and keep Mixxx's licence, except `tests/vendor/lodash.mixxx.js`, which is MIT (see `tests/vendor/LICENSE-lodash.txt`).
