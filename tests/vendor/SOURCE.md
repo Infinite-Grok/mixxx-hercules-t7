@@ -1,0 +1,14 @@
+# vendor/ : files copied unmodified from Mixxx 2.5
+
+Source: `res/controllers/` of the Mixxx repository, https://github.com/mixxxdj/mixxx (2.5 branch). All three files are byte-identical in the `2.5.6` tag (SHA-256 of `git show 2.5.6:res/controllers/<file>` compared).
+
+| File | SHA-256 |
+|---|---|
+| `midi-components-0.0.js` | `207a5e415e2c37c1797552f46cf9873dfed4ad35a4cf515301bb3d5e3dc9a141` |
+| `common-controller-scripts.js` | `12c17168b6f9d6b0774ef9c04dd78c1593081eeee04a506b6a6c96efaa1abb86` |
+| `lodash.mixxx.js` | `b85109dce09ed22adb83fcff99b25aa6cdbb258471679e86c42f4dcd54225ed1` |
+
+Mixxx always loads `common-controller-scripts.js` before a mapping's own `<scriptfiles>` (`REQUIRED_SCRIPT_FILE`,
+`src/controllers/legacycontrollermappingfilehandler.cpp:233`), so the harness does the same. `midi-components-0.0.js` and
+`lodash.mixxx.js` are loaded only if the candidate's XML lists them. They are GPL (Mixxx). These
+copies are test support only and keep their original licence (GPL-2.0-or-later, as Mixxx).

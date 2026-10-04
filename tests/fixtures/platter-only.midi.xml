@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MixxxControllerPreset mixxxVersion="2.5" schemaVersion="1">
+    <info>
+        <name>Test fixture: T7 platter bindings only</name>
+        <author>test</author>
+        <description>Only the platter, platter timestamp and play bindings plus the platter script.</description>
+    </info>
+    <controller id="DJControl Inpulse T7">
+        <scriptfiles>
+            <file filename="Hercules-DJControl-Inpulse-T7-platter.js" functionprefix="DJCiT7Platter"/>
+        </scriptfiles>
+        <controls>
+            <control><group>[Channel1]</group><key>DJCiT7Platter.platter</key><status>0xB1</status><midino>0x09</midino><options><script-binding/></options></control>
+            <control><group>[Channel2]</group><key>DJCiT7Platter.platter</key><status>0xB2</status><midino>0x09</midino><options><script-binding/></options></control>
+            <control><group>[Channel1]</group><key>DJCiT7Platter.platterTime</key><status>0xE1</status><midino>0x00</midino><options><script-binding/></options></control>
+            <control><group>[Channel2]</group><key>DJCiT7Platter.platterTime</key><status>0xE2</status><midino>0x00</midino><options><script-binding/></options></control>
+            <control><group>[Channel1]</group><key>DJCiT7Platter.play</key><status>0x91</status><midino>0x07</midino><options><script-binding/></options></control>
+            <control><group>[Channel2]</group><key>DJCiT7Platter.play</key><status>0x92</status><midino>0x07</midino><options><script-binding/></options></control>
+            <control><group>[Channel1]</group><key>DJCiT7Platter.platter</key><status>0xB4</status><midino>0x09</midino><options><script-binding/></options></control>
+            <control><group>[Channel2]</group><key>DJCiT7Platter.platter</key><status>0xB5</status><midino>0x09</midino><options><script-binding/></options></control>
+            <control><group>[Channel1]</group><key>DJCiT7Platter.platterTime</key><status>0xE4</status><midino>0x00</midino><options><script-binding/></options></control>
+            <control><group>[Channel2]</group><key>DJCiT7Platter.platterTime</key><status>0xE5</status><midino>0x00</midino><options><script-binding/></options></control>
+        </controls>
+    </controller>
+</MixxxControllerPreset>
