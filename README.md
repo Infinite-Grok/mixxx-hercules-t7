@@ -94,6 +94,12 @@ The **browse knob ring** flashes with the beat of a playing deck: red on beat 1,
 - **Beta, tested on Windows only so far.** Linux and macOS are untested.
 - The beatmatch-guide lights (tempo arrows, beat align) are not used.
 
+### Hardware test status
+
+On Windows with stock Mixxx 2.5.6, the author has checked playback, sync, scratching, mixing, hot cue/loop/sampler pads, pad colours and the browse-ring flash. Later checks confirmed that held rolls and samplers release when the mapping is disabled, PARAM releases across SHIFT on the left deck, and FX pad 4 is audible through headphones.
+
+The latest FX-lever and FX-light fixes pass offline tests, but still need a combined check in Mixxx on the T7. Headphone behavior after the new FX-light setup, shutdown lights, and USB reconnect also need checking. The latest session used headphones; main speaker output was not checked. Please treat this as a beta and try your setup before a live set.
+
 ## Report a problem
 
 Open an issue at https://github.com/Infinite-Grok/mixxx-hercules-t7/issues and tell me:
