@@ -330,6 +330,26 @@
                 <key>DJCiT7.deck1.effectLever.input</key>
                 <description>FX lever, deck 1: effect unit on while held</description>
                 <status>0x91</status>
+                <midino>0x56</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCiT7.deck1.effectLever.input</key>
+                <description>FX lever, deck 1: effect unit on while held</description>
+                <status>0x91</status>
+                <midino>0x57</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCiT7.deck1.effectLever.input</key>
+                <description>FX lever, deck 1: effect unit on while held</description>
+                <status>0x91</status>
                 <midino>0x58</midino>
                 <options>
                     <script-binding/>
@@ -2237,6 +2257,26 @@
                 <description>FX lever, deck 2: effect unit on while held</description>
                 <status>0x92</status>
                 <midino>0x55</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>DJCiT7.deck2.effectLever.input</key>
+                <description>FX lever, deck 2: effect unit on while held</description>
+                <status>0x92</status>
+                <midino>0x56</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>DJCiT7.deck2.effectLever.input</key>
+                <description>FX lever, deck 2: effect unit on while held</description>
+                <status>0x92</status>
+                <midino>0x57</midino>
                 <options>
                     <script-binding/>
                 </options>

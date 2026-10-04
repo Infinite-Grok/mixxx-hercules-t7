@@ -32,6 +32,7 @@ const MUTATIONS = [
   {name: 'sampler release does not stop (no hold-to-play)', file: SCRIPT, edit: s => s.replace('                engine.setValue(this.group, "cue_gotoandstop", 1);', '                engine.setValue(this.group, "play", 1);'), expect: ['sampler page 4:']},
   {name: 'deck release skips the held-action release (roll, sampler, FX left active at shutdown)', file: SCRIPT, edit: s => s.replace('    this.releaseHeld();\n', ''), expect: ['held release (shutdown, deck 1)', 'held release (init again, deck 2)']},
   {name: 'shifted PARAM bindings removed from the XML (nudge stranded by SHIFT)', file: XML, edit: s => s.replace(/ *<control>\n(?:(?!<\/control>)[^])*<\/control>\n/g, c => (/param(Up|Down)Button/.test(c) && /<status>0x9[45]<\/status>/.test(c) ? '' : c)), expect: ['PARAM + SHIFT (deck 1)', 'PARAM + SHIFT (deck 2)']},
+  {name: 'FX lever note 0x56 binding removed from the XML (lever dead after power-on)', file: XML, edit: s => s.replace(/ *<control>\n(?:(?!<\/control>)[^])*<\/control>\n/g, c => (/effectLever/.test(c) && /<status>0x91<\/status>/.test(c) && /<midino>0x56<\/midino>/.test(c) ? '' : c)), expect: ['fx lever note 0x56 (deck 1)']},
   {name: 'padBase lamp removed', file: SCRIPT, edit: s => s.replace('midi.sendShortMsg(pads, deck.padBase + i, value);', ''), expect: ['pad lamp is also driven']},
 ];
 
